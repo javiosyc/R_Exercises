@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><meta name="exporter-version" content="Evernote Mac 6.0.3 (451151)"/><meta name="created" content="2014-12-13 04:10:31 +0000"/><meta name="source" content="Clearly"/><meta name="source-url" content="https://class.coursera.org/rprog-017/assignment/view?assignment_id=3"/><meta name="updated" content="2014-12-13 04:12:06 +0000"/><title>Assignment Details | Coursera</title></head><body>
+<div style="font-size: 32px;"><b>R Programming</b></div>
+<div>
+<div>
+<div>
+<h1><a shape="rect" href="https://class.coursera.org/rprog-017/" target="_blank">R Programming</a>教授 Roger D. Peng, PhD, Jeff Leek, PhD, Brian Caffo, PhD</h1>
+</div>
+<h2>编程作业 1: 空气污染: Instructions <a shape="rect" href="https://accounts.coursera.org/i/zendesk/courserahelp?return_to=https://courserahelp.zendesk.com/hc/en-us/articles/201212249-Programming-Assignments" title="Click here if you're experiencing technical problems or found errors in the course materials." target="_blank">Help</a></h2>
+第一个编程作业中，你需要编写三个函数以便与此作业附带的数据集进行交互。数据集包含在zip文件 <b>specdata.zip</b>中，你可以从Coursera网站下载。 包含数据的zip文件可以在此下载:
+<ul>
+<li><a shape="rect" href="https://d396qusza40orc.cloudfront.net/rprog%2Fdata%2Fspecdata.zip" target="_blank">specdata.zip</a> [2.4MB]</li>
+</ul>
+该zip文件包含332个逗号分隔值(comma-separated-value /CSV)文件，其中包含美国332个位置的细颗粒物(PM)空气污染的污染监测数据。每个文件都包含一个监测点的数据，且每个监测点的ID编号均包含在文件名中。例如，监测点200包含在文件“200.csv”中。每个文件都包含三个变量：:
+<ul>
+<li>日期: YYYY-MM-DD （年-月-日）格式的检测日期</li>
+<li>硫酸盐: 相应日期内空气中硫酸盐(sulfate)颗粒物的污染程度 （计量单位为微克/立方米）</li>
+<li>硝酸盐:相应日期内空气中硝酸盐(nitrate)颗粒物的污染程度 （计量单位为微克/立方米）</li>
+</ul>
+对于此编程作业，你需要解压缩该文件并创建目录“specdata”。将zip文件解压缩之后，不要对“specdata”目录中的文件进行任何修改。在每个文件中，您都会发现有许多天没有硫酸盐或硝酸盐（或两者都没有，编码为NA）。这在美国空气污染监测数据中是很常见的。 编写名为“pollutantmean”的函数，计算指定列表中的所有监测点的污染物（硫酸盐或硝酸盐）平均值。函数“pollutantmean”有三个参数：“directory”、“pollutant”和“id”。如果指定向量监测点的ID编号，那么“pollutantmean”会从“directory”参数中指定的目录下读取监测点的颗粒物数据，并返回所有监测点的污染物平均值，忽略代码为NA的任何缺失值。该函数的原型如下
+<pre>
+pollutantmean &lt;- function(directory, pollutant, id = 1:332) {
+        ## 'directory' 是长度为1的字符向量，指明
+        ## CSV文件的位置
+
+        ## 'pollutant' 是长度为1的字符向量，指明
+        ## 污染物的名称，我们将会计算其
+        ## 平均值; 要么是“硫酸盐(sulfate)”要么是“硝酸盐(nitrate)”
+
+        ## 'id'是正整数向量，指明监测点的ID，
+        ## 将要被要使用的
+
+        ## 返回列表内的所有监测点的污染物平均值，
+        ## “id”向量中的 (忽略 NA值)
+}
+</pre>
+你可以看到一些 <a shape="rect" href="https://d396qusza40orc.cloudfront.net/rprog%2Fdoc%2Fpollutantmean-demo.html" target="_blank">此函数的示例输出</a>. 你编写的函数应该能与此输出匹配。 请将你的代码保存到名为 <b>pollutantmean.R</b>的文件中。 编写一个函数，用于读取装满文件的目录，并报告每个数据文件中完整观测到的案例数。该函数应该会返回数据帧，其中第一列是该文件的名称，第二列是完整案例的数量。 该函数的原型如下
+<pre>
+complete &lt;- function(directory, id = 1:332) {
+        ## 'directory' 是长度为1的字符向量，指明
+        ##  CSV 文件的位置
+
+        ## 'id' 是正整数向量，指明监测点的ID号，
+        ## 将要被使用的
+        
+        ## 返回以下格式的数据帧：
+        ## id nobs
+        ## 1  117
+        ## 2  1041
+        ## ...
+        ## 其中'id' 是监测点ID编号，而'nobs'是
+        ## 完整案例的数量
+}
+</pre>
+你可以看到一些 <a shape="rect" href="https://d396qusza40orc.cloudfront.net/rprog%2Fdoc%2Fcomplete-demo.html" target="_blank">此函数的示例输出</a>。 你编写的函数应该能与此输出匹配。请将你的代码保存到名为 <b>complete.R</b>的文件中。要运行此部分提交的版本，请确保你的工作目录下含有文件 <b>complete.R</b>。 编写用于获取数据文件目录和完整案例阈值的函数，并计算监测位置中硫酸盐和硝酸盐之间的相关性，其中完整观测的案例数（针对所有变量）大于阈值。该函数将返回监测点的相关性向量，以满足阈值要求。如果没有监测点可以满足阈值要求，则该函数将返回长度为0的数值向量。该函数的原型如下
+<pre>
+corr &lt;- function(directory, threshold = 0) {
+        ## 'directory' 是长度为1的字符向量，指明
+        ##  CSV 文件的位置
+
+        ## 'threshold' 是长度为1的数值向量，指明
+        ## 完整观测的案例的数量 (针对所有
+        ## 变量) 是必须的，为了计算这两个的相关性：
+        ## 硝酸盐(nitrate)和硫酸盐(sulfate); 默认值为 0
+
+        ## 返回相关性的数值向量
+}
+</pre>
+在这个函数中你需要使用R中的 'cor'函数，它是用来计算两个向量之间的相关性。 请通过 '?cor' 阅读该函数的帮助页面，确保你了解其使用方法。
+<p>你可以看到一些<a shape="rect" href="https://d396qusza40orc.cloudfront.net/rprog%2Fdoc%2Fcorr-demo.html" target="_blank">该函数的示例输出</a>。你所写的函数必须能够和这个输出匹配。请将你的代码保存在名为 <b>corr.R</b>的文件中。要运行此部分提交的版本，请确保你的工作目录下含有文件 <b>corr.R</b>。</p>
+此作业将使用通过你的计算机运行的提交脚本执行的单元测试进行评分。要获得提交脚本，请使用R运行以下代码：
+<pre>
+source("http://d396qusza40orc.cloudfront.net/rprog%2Fscripts%2Fsubmitscript1.R")
+</pre>
+或者你可以 <a shape="rect" href="https://d396qusza40orc.cloudfront.net/rprog%2Fscripts%2Fsubmitscript1.R" target="_blank">下载脚本</a> 到你的工作目录（注意：你可能需要将文件重新命名为"submitscript1.R"，然后通过
+<pre>
+source("submitscript1.R")
+</pre>
+对文件进行本地寻源。 首次运行提交脚本时，系统会提示您输入提交登录帐户和密码。可以在“编程作业”页面顶部找到这些内容。要执行提交脚本，请在控制台(console)提示符上输入
+<pre>
+submit()
+</pre>
+（在为文件寻源之后）。 <b>注意，你必须连接到互联网，才能正常提交脚本。在R中执行<tt>submit</tt>脚本提交时，你会看到以下菜单（在输入提交登录电子邮件和密码之后）：</b>
+<pre>
+<b>
+[1] 'pollutantmean' part 1
+[2] 'pollutantmean' part 2
+[3] 'pollutantmean' part 3
+[4] 'pollutantmean' part 4
+[5] 'complete' part 1
+[6] 'complete' part 2
+[7] 'complete' part 3
+[8] 'corr' part 2
+[9] 'corr' part 2
+[10] 'corr' part 2
+Which part are you submitting [1-10]? 
+</b>
+</pre>
+<b>我们会将你的函数输出与正确输出进行比较。每次通过测试，你都会在“作业列表” 网页上得到指定分数。</b></div>
+</div>
+</body></html>
